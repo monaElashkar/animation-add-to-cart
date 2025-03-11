@@ -28,7 +28,6 @@ List<Map<String, dynamic>> products = [
     "name": "Jeans",
     "price": 75.0,
     "image": "assets/images/logo.png",
-    "offerMessage": "15% off"
   },
   {
     "id": 3,
@@ -49,14 +48,12 @@ List<Map<String, dynamic>> products = [
     "name": "Shoes",
     "price": 110.0,
     "image": "assets/images/logo.png",
-    "offerMessage": "20% off"
   },
   {
     "id": 6,
     "name": "Watch",
     "price": 200.0,
     "image": "assets/images/logo.png",
-    "offerMessage": "15% off"
   },
   {
     "id": 7,

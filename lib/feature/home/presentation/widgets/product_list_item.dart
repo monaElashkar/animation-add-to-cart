@@ -24,8 +24,8 @@ class ProductListItem extends StatelessWidget {
     return Card(
       child: ClipRect(
         child: OfferProduct(
-          offerMessage: "hello",
-          active: false,
+          offerMessage: product.offerMessage,
+          active:product.offerMessage!=null? true:false,
           product: ListTile(
             onTap: () => onClick(widgetKey, product),
             leading: mandatoryContainer,
