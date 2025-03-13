@@ -48,6 +48,10 @@ class Product {
         'discountedPrice': product.discountedPrice,
         'image': product.image,
         'offerMessage': product.offerMessage,
+        'description': product.description,
+        'variants': product.variants != null
+            ? product.variants!.map((v) => v.toJson()).toList()
+            : null,
       };
 
   static String encode(List<Product> product) => json.encode(

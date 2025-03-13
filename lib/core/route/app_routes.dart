@@ -1,6 +1,7 @@
 import 'package:bluezone_task/feature/home/data/model/product_models.dart';
 import 'package:bluezone_task/feature/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
+import '../../feature/cart/presentation/screens/cart_screen.dart';
 import '../../feature/home/presentation/screens/home_screen.dart';
 import '../../feature/home/presentation/screens/product_details_screen.dart';
 
@@ -8,6 +9,7 @@ class Routers {
   static const String inital = '/';
   static const String homeScreen = '/HomeScreen';
   static const String productDetailsScreen = '/ProductDetailsScreen';
+  static const String cartScreen = '/CartScreen';
 }
 
 class RoutersGenerated {
@@ -26,9 +28,11 @@ class RoutersGenerated {
         return MaterialPageRoute(
           builder: (_) =>  ProductDetailsScreen(product:settings.arguments as Product)
         );
-        // return MaterialPageRoute(
-        //   builder: (_) =>  ProductDetailsScreen(product: ProductDetailsProvider().getProduct())
-        // );       
+      case Routers.cartScreen:
+        return MaterialPageRoute(
+          builder: (_) =>  CartScreen()
+        );
+       
 
       default:
         return MaterialPageRoute(builder: (_) => DefaultScreen());

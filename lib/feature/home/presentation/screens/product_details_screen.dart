@@ -2,6 +2,7 @@ import 'package:bluezone_task/feature/home/data/model/product_models.dart';
 import 'package:bluezone_task/feature/home/presentation/widgets/product_details_widgets/add_to_cart_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../cart/data/model/cart_model.dart';
 import '../provider/home_provider.dart';
 import '../widgets/product_details_widgets/product_info_widget.dart';
 import '../widgets/product_details_widgets/product_variants_widget.dart';
@@ -75,8 +76,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           ),
         );
       } else {
-        Provider.of<CartProvider>(context, listen: false)
-          ..addToCart(widget.product);
+        Provider.of<HomeProvider>(context, listen: false)
+          ..addToCart(CartModel(quantity: 1, product: widget.product));
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text("${widget.product.name} تمت إضافته إلى السلة!"),
@@ -85,8 +86,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         );
       }
     } else {
-      Provider.of<CartProvider>(context, listen: false)
-        ..addToCart(widget.product);
+      Provider.of<HomeProvider>(context, listen: false)
+        ..addToCart(CartModel(quantity: 1, product: widget.product));
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("${widget.product.name} تمت إضافته إلى السلة!"),

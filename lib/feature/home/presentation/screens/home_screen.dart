@@ -1,3 +1,4 @@
+import 'package:bluezone_task/feature/cart/data/model/cart_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/route/app_routes.dart';
@@ -22,15 +23,15 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    Provider.of<CartProvider>(context, listen: false)..GetProductsList();
-    Provider.of<CartProvider>(context, listen: false)..getCart();
+    Provider.of<HomeProvider>(context, listen: false)..GetProductsList();
+    Provider.of<HomeProvider>(context, listen: false)..getCart();
     _cartQuantityItems =
-        Provider.of<CartProvider>(context, listen: false).items.length;
+        Provider.of<HomeProvider>(context, listen: false).items.length;
   }
 
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<CartProvider>(context);
+    final cart = Provider.of<HomeProvider>(context);
     return AddToCartAnimation(
       // To send the library the location of the Cart icon
       cartKey: cartKey,
@@ -51,13 +52,18 @@ class HomeScreenState extends State<HomeScreen> {
           centerTitle: false,
           actions: [
             const SizedBox(width: 16),
-            AddToCartIcon(
-              qtdeBadge: cart.items.length.toString(),
-              key: cartKey,
-              icon: const Icon(Icons.shopping_cart),
-              badgeOptions: const BadgeOptions(
-                active: true,
-                backgroundColor: Colors.red,
+            InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, Routers.cartScreen);
+              },
+              child: AddToCartIcon(
+                qtdeBadge: cart.items.length.toString(),
+                key: cartKey,
+                icon: const Icon(Icons.shopping_cart),
+                badgeOptions: const BadgeOptions(
+                  active: true,
+                  backgroundColor: Colors.red,
+                ),
               ),
             ),
             const SizedBox(
@@ -76,7 +82,7 @@ class HomeScreenState extends State<HomeScreen> {
               await runAddToCartAnimation(widgetKey);
               await cartKey.currentState!
                   .runCartAnimation((++_cartQuantityItems).toString());
-              cart.addToCart(product);
+              cart.addToCart(CartModel(quantity: 1, product: product));
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text("تمت إضافة ${product.name} إلى السلة!")),
               );
