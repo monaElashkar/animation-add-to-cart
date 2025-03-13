@@ -6,20 +6,22 @@ class CartProvider extends ChangeNotifier {
   List<CartModel> cartList = [];
   double total = 0;
   double totalDiscounted = 0;
-  getCart() async {
+  getCart(String code) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? cart = prefs.getString('cart');
     cartList.clear();
     cartList = CartModel.decode(cart);
     print('getCart');
+    totalPriceCalculated();
+    discountedPriceCalculated(code);
     notifyListeners();
   }
 
-  removeFromCart(CartModel product,String code) {
+  removeFromCart(CartModel product, String code) {
     cartList.remove(product);
     saveCart();
-    discountedPriceCalculated(code);
     totalPriceCalculated();
+    discountedPriceCalculated(code);
     notifyListeners();
   }
 
@@ -30,14 +32,16 @@ class CartProvider extends ChangeNotifier {
   }
 
   totalPriceCalculated() {
+    total = 0;
     cartList.forEach((item) {
       total +=
           item.quantity * (item.product.discountedPrice ?? item.product.price);
     });
-   notifyListeners();
+    notifyListeners();
   }
 
   discountedPriceCalculated(String code) {
+    totalDiscounted = 0;
     if (code == 'quant') {
       totalDiscounted = total * 0.1; // 10% discount
     } else if (code == 'value') {
@@ -47,7 +51,7 @@ class CartProvider extends ChangeNotifier {
     } else {
       totalDiscounted = total; // no discount
     }
-     totalDiscounted;
+    totalDiscounted;
     notifyListeners();
   }
 }

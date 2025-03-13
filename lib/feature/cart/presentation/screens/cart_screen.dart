@@ -20,7 +20,7 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   void initState() {
-    Provider.of<CartProvider>(context, listen: false)..getCart();
+    Provider.of<CartProvider>(context, listen: false)..getCart(codeController.text);
     super.initState();
   }
 
