@@ -10,7 +10,7 @@ class AppStyles {
         fontWeight: FontWeight.w400,
         color: AppColors.black);
   }
-  
+
   static TextStyle size16W700ColorBlack(BuildContext context,
       {double? fontSize}) {
     return TextStyle(
@@ -18,6 +18,26 @@ class AppStyles {
         fontWeight: FontWeight.w700,
         color: AppColors.black);
   }
+
+  static TextStyle size16ColorGreyLineThrough(BuildContext context, {double? fontSize}) {
+    return TextStyle(
+        fontSize: getResponsiveFontSize(context, fontSize: fontSize ?? 16.0),
+        color: AppColors.grey,
+        decoration: TextDecoration.lineThrough);
+  }
+  static TextStyle size18BoldColorRed(BuildContext context, {double? fontSize}) {
+    return TextStyle(
+        fontSize: getResponsiveFontSize(context, fontSize: fontSize ?? 18.0),
+        color: AppColors.red,
+        fontWeight: FontWeight.bold,);
+        }
+  static TextStyle size16BoldColorBlack(BuildContext context, {double? fontSize}) {
+    return TextStyle(
+        fontSize: getResponsiveFontSize(context, fontSize: fontSize ?? 16.0),
+        color: AppColors.black,
+        fontWeight: FontWeight.bold,
+      );
+        }
 
   static TextStyle customResponsiveTextInputs(
       {required BuildContext context,

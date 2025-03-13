@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/theme/app_color.dart';
+import '../../../../../core/theme/app_color.dart';
 
 class OfferProduct extends StatelessWidget {
   final Widget product;

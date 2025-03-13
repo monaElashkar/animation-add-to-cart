@@ -14,7 +14,7 @@ class CartProvider extends ChangeNotifier {
   }
   getCart() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String cart = prefs.getString('cart') ?? '';
+    String? cart = prefs.getString('cart');
     items.clear();
     items = Product.decode(cart);
     print('getCart');

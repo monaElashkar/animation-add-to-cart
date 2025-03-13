@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../../core/route/app_routes.dart';
 import '../../data/model/product_models.dart';
 import '../provider/home_provider.dart';
-import '../widgets/add_to_cart_animation.dart';
-import '../widgets/product_list_item.dart';
+import '../widgets/home_widgets/add_to_cart_animation.dart';
+import '../widgets/home_widgets/product_list_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -17,15 +18,16 @@ class HomeScreenState extends State<HomeScreen> {
   // We can detect the location of the cart by this  GlobalKey<CartIconKey>
   GlobalKey<CartIconKey> cartKey = GlobalKey<CartIconKey>();
   late Function(GlobalKey) runAddToCartAnimation;
-   int _cartQuantityItems=0;
+  int _cartQuantityItems = 0;
   @override
   void initState() {
     super.initState();
     Provider.of<CartProvider>(context, listen: false)..GetProductsList();
     Provider.of<CartProvider>(context, listen: false)..getCart();
-    _cartQuantityItems = Provider.of<CartProvider>(context, listen: false).items.length;
-    
+    _cartQuantityItems =
+        Provider.of<CartProvider>(context, listen: false).items.length;
   }
+
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<CartProvider>(context);
@@ -66,6 +68,10 @@ class HomeScreenState extends State<HomeScreen> {
         body: ListView.builder(
           itemCount: cart.products.length,
           itemBuilder: (context, index) => ProductListItem(
+            onTap: () {
+              Navigator.pushNamed(context, Routers.productDetailsScreen,
+                  arguments: cart.products[index]);
+            },
             onClick: (GlobalKey widgetKey, Product product) async {
               await runAddToCartAnimation(widgetKey);
               await cartKey.currentState!
